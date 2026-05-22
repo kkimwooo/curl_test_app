@@ -44,16 +44,17 @@ jobs:
       - name: Build macOS App
         run: flutter build macos --release --no-codesign
 
-      # 7. 빌드 결과물(.app)을 배포용 zip 파일로 압축
-      - name: Zip Release Artifact
+      # 7. 바로 실행 가능한 DMG (디스크 이미지) 파일 생성
+      - name: Create DMG Artifact
         run: |
-          cd build/macos/Build/Products/Release
-          zip -r ../../../../levi_curl_test_app.zip levi_curl_test_app.app
+          mkdir -p dmg_root
+          cp -r build/macos/Build/Products/Release/levi_curl_test_app.app dmg_root/
+          hdiutil create -volname "Leviathan" -srcfolder dmg_root -ov -format UDZO levi_curl_test_app.dmg
 
-      # 8. GitHub Release 생성 및 빌드된 zip 아티팩트 업로드
+      # 8. GitHub Release 생성 및 빌드된 dmg 아티팩트 업로드
       - name: Upload Release Asset
         uses: softprops/action-gh-release@v1
         with:
-          files: levi_curl_test_app.zip
+          files: levi_curl_test_app.dmg
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

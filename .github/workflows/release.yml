@@ -40,9 +40,9 @@ jobs:
       - name: Run Build Runner
         run: dart run build_runner build --delete-conflicting-outputs
 
-      # 6. macOS Release 빌드 (CI 환경이므로 코드사인 생략 옵션 추가)
+      # 6. macOS Release 빌드
       - name: Build macOS App
-        run: flutter build macos --release --no-codesign
+        run: flutter build macos --release
 
       # 7. 바로 실행 가능한 DMG (디스크 이미지) 파일 생성
       - name: Create DMG Artifact

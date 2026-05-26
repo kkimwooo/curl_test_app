@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - 'v*' # v1.0.0 등 'v'로 시작하는 태그가 푸시되었을 때 동작
+  workflow_dispatch: # GitHub 웹 UI에서 수동으로 실행 가능하게 설정
 
 permissions:
   contents: write # Release에 빌드된 파일을 업로드하기 위한 쓰기 권한 설정

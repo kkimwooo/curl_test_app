@@ -1,4 +1,4 @@
-# levi_curl_test_app
+# curl_test_app
 
 A new Flutter project.
 
